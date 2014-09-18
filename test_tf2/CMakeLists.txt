@@ -1,9 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
 
-if(NOT CATKIN_ENABLE_TESTING)
-  return()
-endif()
-
 project(test_tf2)
 
 
@@ -12,11 +8,16 @@ find_package(Boost REQUIRED COMPONENTS thread)
 find_package(orocos_kdl REQUIRED)
 
 
+
 include_directories(${Boost_INCLUDE_DIRS} ${catkin_INCLUDE_DIRS} ${orocos_kdl_INCLUDE_DIRS})
 
 link_directories(${orocos_kdl_LIBRARY_DIRS})
 
 catkin_package()
+
+if(NOT CATKIN_ENABLE_TESTING)
+  return()
+endif()
 
 catkin_add_gtest(buffer_core_test test/buffer_core_test.cpp)
 target_link_libraries(buffer_core_test ${Boost_LIBRARIES} ${catkin_LIBRARIES} ${orocos_kdl_LIBRARIES})
